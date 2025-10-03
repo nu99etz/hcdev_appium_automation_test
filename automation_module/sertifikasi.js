@@ -1,4 +1,5 @@
 const { byValueKey, byText, byType } = require('appium-flutter-finder');
+const { timeout } = require('../helper/helper');
 
 const sertifikasiAutomation = async (driver, setup = {}) => {
 
