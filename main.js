@@ -25,12 +25,14 @@ const {
 const { getElementId } = require('wd/lib/utils');
 const { pelatihanAutomation } = require('./automation_module/pelatihan');
 const { sertifikasiAutomation } = require('./automation_module/sertifikasi');
+const { timeout } = require('./helper/helper');
+const { evaluasiRuangAutomation } = require('./automation_module/evaluasi_ruang');
 
 (async () => {
 
   const driver = await wdio.remote(opts);
-  const nik = "2115554"; // nik yang mau login
-  const menu = 'training'
+  const nik = "2095130"; // nik yang mau login
+  const menu = 'evaluasi_ruangan'
 
   // authenticator
   await authProcess(driver, nik, "123456") // proses login
@@ -139,6 +141,28 @@ const { sertifikasiAutomation } = require('./automation_module/sertifikasi');
       'petugas_perencanaan': 'ARIEF NOVANSA DWI PUTRA',
       'komentar': 'yanto',
       'approver': "MAFTOCH, S.T. - 2105102"
+    })
+  } else if(menu == 'evaluasi_ruangan') {
+    const tapMenu = byValueKey("menu_peminjaman_fasilitas")
+    await driver.elementClick(tapMenu) // klik ke menu training
+
+    await driver.elementClick(byValueKey('btnPeminjamanRuang'))
+
+    await timeout(100)
+    await driver.elementClick(byValueKey("menu_peminjaman_ruang"))
+
+    evaluasiRuangAutomation(driver, {
+      'evaluasi_ruang_1': '4',
+      'evaluasi_ruang_2': '2',
+      'evaluasi_ruang_3': '3',
+      'evaluasi_ruang_4': '1',
+      'evaluasi_ruang_saran': "lebih ke arus",
+      'evaluasi_ruang_komentar': "yanto",
+      'evaluasi_petugas_1': '4',
+      'evaluasi_petugas_2': '2',
+      'evaluasi_petugas_3': '3',
+      'evaluasi_petugas_saran': "lebih ke arus",
+      'evaluasi_petugas_komentar': "yanto",
     })
   }
 })();
