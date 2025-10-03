@@ -1,0 +1,4 @@
+APPIUM_PLATFORM_NAME='Android'
+APPIUM_DEVICE_NAME='SM G998B'
+APPIUM_APP_LOCATION='/Users/nugraha/Project/mobile/hcdev_petrokimia/build/app/outputs/flutter-apk/app-debug.apk'
+APPIUM_AUTOMATION_NAME='Flutter'

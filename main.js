@@ -1,18 +1,19 @@
 const wdio = require('webdriverio');
 const assert = require('assert');
 const { byValueKey, byText, bySemanticsLabel, byType, byTooltip } = require('appium-flutter-finder');
+require('dotenv').config()
 
 const osSpecificOps = {
-  'platformName': 'Android',
-  'appium:deviceName': 'SM G998B',
-  'appium:app': '/Users/nugraha/Project/mobile/hcdev_petrokimia/build/app/outputs/apk/release/app-release.apk',
+  'platformName': process.env.APPIUM_PLATFORM_NAME,
+  'appium:deviceName': process.env.APPIUM_DEVICE_NAME,
+  'appium:app': process.env.APPIUM_APP_LOCATION,
 }
 
 const opts = {
   port: 4723,
   capabilities: {
     ...osSpecificOps,
-    'appium:automationName': 'Flutter',
+    'appium:automationName': process.env.APPIUM_AUTOMATION_NAME,
     'appium:retryBackoffTime': 500
   }
 };
