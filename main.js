@@ -1,5 +1,6 @@
 const wdio = require('webdriverio');
 const assert = require('assert');
+const readline = require('node:readline');
 const { byValueKey, byText, bySemanticsLabel, byType, byTooltip } = require('appium-flutter-finder');
 require('dotenv').config()
 
@@ -29,7 +30,7 @@ const { sertifikasiAutomation } = require('./automation_module/sertifikasi');
 
   const driver = await wdio.remote(opts);
   const nik = "2115554"; // nik yang mau login
-  const menu = 'sertifikasi'
+  const menu = 'training'
 
   // authenticator
   await authProcess(driver, nik, "123456") // proses login

@@ -1,4 +1,5 @@
 const { byValueKey, byText, byType } = require('appium-flutter-finder');
+const { timeout } = require('../helper/helper');
 
 const pelatihanAutomation = async (driver, setup = {}) => {
 
@@ -26,50 +27,51 @@ const pelatihanAutomation = async (driver, setup = {}) => {
 
     await driver.elementClick(byValueKey("dropdown_sebagai"))
     await driver.elementClick(byText(setup['sebagai']))
-
+    
+    await timeout(1000)
     await driver.execute('flutter:scrollIntoView', byValueKey('dropdown_jenis_pelaksanaan'), { alignment: 0.1 })
-
     await driver.elementClick(byValueKey("dropdown_jenis_pelaksanaan"))
     await driver.elementClick(byText(setup['jenis_pelaksanaan']))
 
+    await timeout(1000)
     await driver.execute('flutter:scrollIntoView', byValueKey('dropdown_metode_pelaksanaan'), { alignment: 0.1 })
-
     await driver.elementClick(byValueKey("dropdown_metode_pelaksanaan"))
     await driver.elementClick(byText(setup['metode_pelaksanaan']))
-
+    
     if (setup['isPic'] == true) {
+        await timeout(1000)
         await driver.execute('flutter:scrollIntoView', byValueKey('dropdown_kategori_pelaksanaan'), { alignment: 0.1 })
         await driver.elementClick(byValueKey("dropdown_kategori_pelaksanaan"))
         await driver.elementClick(byText(setup['kategori_pelaksanaan']))
     }
 
+    await timeout(1000)
     await driver.execute('flutter:scrollIntoView', byValueKey('dropdown_jenis_diklat'), { alignment: 0.1 })
-
     await driver.elementClick(byValueKey("dropdown_jenis_diklat"))
     await driver.elementClick(byText(setup['jenis_diklat']['jenis_diklat']))
 
+    await timeout(1000)
     await driver.execute('flutter:scrollIntoView', byValueKey('dropdown_diklat_karyawan'), { alignment: 0.1 })
-
     await driver.elementClick(byValueKey("dropdown_diklat_karyawan"))
     await driver.elementClick(byText(setup['jenis_diklat']['diklat_karyawan']))
 
+    await timeout(1000)
     await driver.execute('flutter:scrollIntoView', byValueKey("dropdown_data_keategori"), { alignment: 0.1 })
-
     await driver.elementClick(byValueKey("dropdown_data_keategori"))
     await driver.elementClick(byText(setup['kompetensi']['data_kategori']))
 
+    await timeout(1000)
     await driver.execute('flutter:scrollIntoView', byValueKey("dropdown_data_job_family"), { alignment: 0.1 })
-
     await driver.elementClick(byValueKey("dropdown_data_job_family"))
     await driver.elementClick(byText(setup['kompetensi']['data_job_family']))
 
+    await timeout(1000)
     await driver.execute('flutter:scrollIntoView', byValueKey("dropdown_data_job_function"), { alignment: 0.1 })
-
     await driver.elementClick(byValueKey("dropdown_data_job_function"))
     await driver.elementClick(byText(setup['kompetensi']['data_job_function']))
 
+    await timeout(1000)
     await driver.execute('flutter:scrollIntoView', byValueKey("dropdown_data_kompetensi"), { alignment: 0.1 })
-
     await driver.elementClick(byValueKey("dropdown_data_kompetensi"))
     await driver.elementClick(byText(setup['kompetensi']['data_kompetensi']))
 
@@ -77,6 +79,7 @@ const pelatihanAutomation = async (driver, setup = {}) => {
     await driver.elementSendKeys(byValueKey("pelatihan_text"), setup['judul_pelatihan'])
 
     if (setup['isPic']) {
+        await timeout(1000)
         await driver.execute('flutter:scrollIntoView', byValueKey("dropdown_vendor"), { alignment: 0.1 })
         await driver.elementClick(byValueKey("dropdown_vendor"))
         if (setup['vendor']['vendor_search'] != undefined) {
@@ -84,6 +87,7 @@ const pelatihanAutomation = async (driver, setup = {}) => {
         }
         await driver.elementClick(byText(setup['vendor']['nama_vendor']))
 
+        await timeout(1000)
         await driver.execute('flutter:scrollIntoView', byValueKey("dropdown_venor_kategori"), { alignment: 0.1 })
         await driver.elementClick(byValueKey("dropdown_venor_kategori"))
         if (setup['vendor']['kategori_vendor_search'] != undefined) {
@@ -155,6 +159,7 @@ const pelatihanAutomation = async (driver, setup = {}) => {
     await driver.elementSendKeys(byValueKey("estimasi_biaya_total_item_2"), "50000")
 
     if (setup['isPic'] == true) {
+        await timeout(1000)
         await driver.execute('flutter:scrollIntoView', byValueKey("dropdown_departemen"), { alignment: 0.1 })
         await driver.elementClick(byValueKey("dropdown_departemen"))
         if (setup['departemen_anggaran']['departemen_anggaran_search'] != undefined) {
@@ -162,21 +167,22 @@ const pelatihanAutomation = async (driver, setup = {}) => {
         }
         await driver.elementClick(byText(setup['departemen_anggaran']['departemen_anggaran']))
 
+        await timeout(1000)
         await driver.execute('flutter:scrollIntoView', byValueKey("petugas_perencanaan"), { alignment: 0.1 })
         await driver.elementClick(byValueKey("petugas_perencanaan"))
         if (setup['petugas_perencanaan_search'] != undefined) {
             await driver.elementSendKeys(byType('TextField'), setup['petugas_perencanaan_search'])
         }
         await driver.elementClick(byText(setup['petugas_perencanaan']))
-
         await driver.elementSendKeys(byValueKey("komentar_text"), setup['komentar'])
     } else {
+        await timeout(1000)
         await driver.execute('flutter:scrollIntoView', byValueKey("dropdown_pilih_approver"), { alignment: 0.1 })
         await driver.elementClick(byValueKey("dropdown_pilih_approver"))
         await driver.elementClick(byText(setup['approver']))
     }
 
-    setInterval(() => {
+    await setTimeout(async () => {
         console.log("DONE AUTOMATION TESTING PELATIHAN")
         driver.deleteSession();
     }, 1000000)
