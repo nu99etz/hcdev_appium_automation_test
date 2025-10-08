@@ -101,9 +101,19 @@ const pelatihanAutomation = async (driver, setup = {}) => {
     if (setup['isPartialDate'] == true) {
         await driver.elementClick(byValueKey("switch_partial_date"))
         // untuk ini stop dulu karena belum ketemu
-        await driver.elementClick(byValueKey("tanggal_pelaksanaan_partial_date"))
-        await driver.elementClick(byValueKey("cell_30_9_2025"))
-        await driver.elementClick(byValueKey("buttonPilih"))
+        await timeout(1000)
+        await driver.elementClick(byValueKey("template_tanggal_pelaksanaan_date"))
+        // await driver.elementClick(byValueKey("cell_30_9_2025"))
+        await driver.switchContext('NATIVE_APP')
+
+        for(var i = 0; i < setup['partial_dates'].length; i++) {
+            await driver.$(`accessibility id:${setup['partial_dates'][i]}`).click()
+        }
+
+        await driver.switchContext('FLUTTER')
+
+        await timeout(1000)
+        await driver.elementClick(byValueKey("btn_pilih_date_range"))
     } else {
         await driver.elementClick(byValueKey("template_tgl_pelaksanaan_text"))
         await driver.elementClick(byText(setup['tanggal_mulai']))

@@ -32,7 +32,7 @@ const { evaluasiRuangAutomation } = require('./automation_module/evaluasi_ruang'
 
   const driver = await wdio.remote(opts);
   const nik = "2095130"; // nik yang mau login
-  const menu = 'evaluasi_ruangan'
+  const menu = 'sertifikasi'
 
   // authenticator
   await authProcess(driver, nik, "123456") // proses login
@@ -42,13 +42,13 @@ const { evaluasiRuangAutomation } = require('./automation_module/evaluasi_ruang'
     await driver.elementClick(tapMenu) // klik ke menu training
 
     pelatihanAutomation(driver, {
-      'isPic': true,
+      'isPic': false,
       'tambah_peserta': [
         '2095133',
         '2095139',
         '2095140'
       ],
-      'isPartialDate': false,
+      'isPartialDate': true,
       'sebagai': 'Peserta',
       'jenis_pelaksanaan': 'In House Training',
       'metode_pelaksanaan': 'Offline (Luring)',
@@ -70,6 +70,10 @@ const { evaluasiRuangAutomation } = require('./automation_module/evaluasi_ruang'
         'kategori_vendor_search': 'Test',
         'kategori_vendor': 'Tester',
       },
+      'partial_dates': [
+        'Wed, 08 October 2025',
+        'Sun, 12 October 2025'
+      ],
       'tanggal_mulai': "4",
       'tanggal_selesai': "7",
       'durasi_pelatihan': "3",
@@ -93,13 +97,13 @@ const { evaluasiRuangAutomation } = require('./automation_module/evaluasi_ruang'
     await driver.elementClick(tapMenu) // klik ke menu training
 
     sertifikasiAutomation(driver, {
-      'isPic': true,
+      'isPic': false,
       'tambah_peserta': [
         '2095133',
         '2095139',
         '2095140'
       ],
-      'isPartialDate': false,
+      'isPartialDate': true,
       'sebagai': 'Peserta',
       'jenis_pelaksanaan': 'In House Training',
       'metode_pelaksanaan': 'Offline (Luring)',
@@ -117,6 +121,10 @@ const { evaluasiRuangAutomation } = require('./automation_module/evaluasi_ruang'
         'kategori_vendor_search': 'Test',
         'kategori_vendor': 'Tester',
       },
+      'partial_dates': [
+        'Wed, 08 October 2025',
+        'Sun, 12 October 2025'
+      ],
       'tanggal_mulai': "4",
       'tanggal_selesai': "7",
       'durasi_pelatihan': "3",
