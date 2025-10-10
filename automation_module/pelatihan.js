@@ -133,6 +133,20 @@ const pelatihanAutomation = async (driver, setup = {}) => {
     await driver.execute('flutter:scrollIntoView', byValueKey("lokasi_pelaksanaan_pelatihan"), { alignment: 0.1 })
     await driver.elementSendKeys(byValueKey("lokasi_pelaksanaan_pelatihan"), setup['lokasi'])
 
+    await timeout(2000)
+    await driver.switchContext('NATIVE_APP')
+
+    await driver.$("accessibility id:Upload").click()
+
+    if(process.env.APPIUM_DEVICE_NAME == 'CPH2209') {
+        await driver.$("id:com.android.permissioncontroller:id/permission_allow_button").click()
+        await driver.$("xpath:(//android.widget.ImageView[@resource-id=\"com.google.android.providers.media.module:id/icon_thumbnail\"])[1]").click()
+    } else {
+        await driver.$("xpath:(//android.widget.ImageView[@resource-id=\"com.android.documentsui:id/icon_thumb\"])[1]").click()
+    }
+
+    await driver.switchContext('FLUTTER')
+
     if (setup['isPic'] == true) {
         await driver.execute('flutter:scrollIntoView', byValueKey("nominal_voucher"), { alignment: 0.1 })
         if (setup['voucher']['dengan_expired'] == 1) {
@@ -150,9 +164,13 @@ const pelatihanAutomation = async (driver, setup = {}) => {
     await driver.elementClick(byValueKey("estimasi_biaya_uhpd"))
     await driver.elementClick(byValueKey("estimasi_biaya_lainnya"))
 
+    await driver.execute('flutter:scrollIntoView', byValueKey("estimasi_biaya_lainnya"), { alignment: 0.1 })
+
     await driver.elementSendKeys(byValueKey("estimasi_biaya_other_nama_item_0"), "YANTO TESTING")
     await driver.elementSendKeys(byValueKey("estimasi_biaya_other_item_0"), "5")
     await driver.elementSendKeys(byValueKey("estimasi_biaya_total_item_0"), "5000")
+
+    await driver.execute('flutter:scrollIntoView', byValueKey("tambah_baris_button"), { alignment: 0.1 })
 
     await driver.elementClick(byValueKey("tambah_baris_button"))
 

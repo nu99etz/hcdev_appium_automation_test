@@ -46,7 +46,6 @@ const evaluasiRuangAutomation = async (driver, setup = {}) => {
 
         await timeout(2000)
         await driver.switchContext('NATIVE_APP')
-        // await driver.elementClick(byValueKey("alert_tutup"))
         const closeButton = await driver.$("accessibility id:Tutup")
         await closeButton.click()
 
