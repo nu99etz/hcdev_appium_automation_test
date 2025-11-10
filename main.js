@@ -33,7 +33,7 @@ const { lpjAutomation } = require('./automation_module/lpj');
 
   const driver = await wdio.remote(opts);
   const nik = "admin"; // nik yang mau login
-  const menu = 'lpj'
+  const menu = 'training'
 
   // authenticator
   await authProcess(driver, nik, "123456") // proses login
